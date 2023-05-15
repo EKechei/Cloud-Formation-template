@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+ MYEC2:
+    Type: AWS::EC2::Instance
+    DependsOn: EC2SG
+    Properties:
+     ImageId: ami-0889a44b331db0194
+     InstanceType: t2.micro
+     KeyName: Eddy
+     SecurityGroups:
+     - !Ref EC2SG
+
+ EC2SG:
+  Type: AWS::EC2::SecurityGroup
+  Properties:
+   GroupDescription: Allow http traffic
+   SecurityGroupIngress:
+    - IpProtocol: tcp
+      FromPort: 80
+      ToPort: 80
+      CidrIp: 0.0.0.0/0
+
